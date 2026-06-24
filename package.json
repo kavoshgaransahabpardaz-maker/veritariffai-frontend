@@ -1,0 +1,46 @@
+{
+  "name": "veritariffai-front",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint .",
+    "generate:api": "curl -fsSL https://api.veritariffai.co/api/openapi.json -o src/lib/api/generated/openapi.json && openapi-typescript src/lib/api/generated/openapi.json -o src/lib/api/generated/schema.ts",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
+    "@radix-ui/react-dialog": "^1.1.17",
+    "@radix-ui/react-label": "^2.1.10",
+    "@radix-ui/react-scroll-area": "^1.2.12",
+    "@radix-ui/react-separator": "^1.1.10",
+    "@radix-ui/react-slot": "^1.3.0",
+    "@radix-ui/react-tooltip": "^1.2.10",
+    "@tanstack/react-query": "^5.101.1",
+    "@tanstack/react-query-devtools": "^5.101.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.21.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.80.0",
+    "react-router-dom": "^7.18.0",
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/node": "^24.13.2",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^6.0.2",
+    "openapi-typescript": "^7.13.0",
+    "oxlint": "^1.69.0",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.1.0",
+    "vite-tsconfig-paths": "^6.1.1"
+  }
+}

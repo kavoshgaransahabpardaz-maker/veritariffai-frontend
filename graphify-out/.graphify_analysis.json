@@ -1,0 +1,244 @@
+{
+  "communities": {
+    "0": [
+      "tsconfig_app",
+      "tsconfig_app_compileroptions",
+      "tsconfig_app_compileroptions_allowimportingtsextensions",
+      "tsconfig_app_compileroptions_baseurl",
+      "tsconfig_app_compileroptions_jsx",
+      "tsconfig_app_compileroptions_lib",
+      "tsconfig_app_compileroptions_module",
+      "tsconfig_app_compileroptions_moduledetection",
+      "tsconfig_app_compileroptions_moduleresolution",
+      "tsconfig_app_compileroptions_noemit",
+      "tsconfig_app_compileroptions_nofallthroughcasesinswitch",
+      "tsconfig_app_compileroptions_nounusedlocals",
+      "tsconfig_app_compileroptions_nounusedparameters",
+      "tsconfig_app_compileroptions_paths",
+      "tsconfig_app_compileroptions_skiplibcheck",
+      "tsconfig_app_compileroptions_target",
+      "tsconfig_app_compileroptions_tsbuildinfofile",
+      "tsconfig_app_compileroptions_types",
+      "tsconfig_app_compileroptions_verbatimmodulesyntax",
+      "tsconfig_app_include",
+      "tsconfig_app_paths"
+    ],
+    "1": [
+      "package_dependencies",
+      "package_dependencies_class_variance_authority",
+      "package_dependencies_clsx",
+      "package_dependencies_hookform_resolvers",
+      "package_dependencies_lucide_react",
+      "package_dependencies_radix_ui_react_dialog",
+      "package_dependencies_radix_ui_react_label",
+      "package_dependencies_radix_ui_react_scroll_area",
+      "package_dependencies_radix_ui_react_separator",
+      "package_dependencies_radix_ui_react_slot",
+      "package_dependencies_radix_ui_react_tooltip",
+      "package_dependencies_react",
+      "package_dependencies_react_dom",
+      "package_dependencies_react_hook_form",
+      "package_dependencies_react_router_dom",
+      "package_dependencies_tailwind_merge",
+      "package_dependencies_tanstack_react_query",
+      "package_dependencies_tanstack_react_query_devtools",
+      "package_dependencies_zod"
+    ],
+    "2": [
+      "tsconfig_node",
+      "tsconfig_node_compileroptions",
+      "tsconfig_node_compileroptions_allowimportingtsextensions",
+      "tsconfig_node_compileroptions_erasablesyntaxonly",
+      "tsconfig_node_compileroptions_lib",
+      "tsconfig_node_compileroptions_module",
+      "tsconfig_node_compileroptions_moduledetection",
+      "tsconfig_node_compileroptions_noemit",
+      "tsconfig_node_compileroptions_nofallthroughcasesinswitch",
+      "tsconfig_node_compileroptions_nounusedlocals",
+      "tsconfig_node_compileroptions_nounusedparameters",
+      "tsconfig_node_compileroptions_skiplibcheck",
+      "tsconfig_node_compileroptions_target",
+      "tsconfig_node_compileroptions_tsbuildinfofile",
+      "tsconfig_node_compileroptions_types",
+      "tsconfig_node_compileroptions_verbatimmodulesyntax",
+      "tsconfig_node_include"
+    ],
+    "3": [
+      "package_devdependencies",
+      "package_devdependencies_openapi_typescript",
+      "package_devdependencies_oxlint",
+      "package_devdependencies_tailwindcss",
+      "package_devdependencies_tailwindcss_vite",
+      "package_devdependencies_types_node",
+      "package_devdependencies_types_react",
+      "package_devdependencies_types_react_dom",
+      "package_devdependencies_typescript",
+      "package_devdependencies_vite",
+      "package_devdependencies_vite_tsconfig_paths",
+      "package_devdependencies_vitejs_plugin_react"
+    ],
+    "4": [
+      "package",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_generate_api",
+      "package_scripts_lint",
+      "package_scripts_preview",
+      "package_type",
+      "package_version"
+    ],
+    "5": [
+      "generated_schema",
+      "generated_schema_components",
+      "generated_schema_defs",
+      "generated_schema_operations",
+      "generated_schema_paths",
+      "generated_schema_webhooks"
+    ],
+    "6": [
+      "oxlintrc",
+      "oxlintrc_plugins",
+      "oxlintrc_rules",
+      "oxlintrc_rules_react_only_export_components",
+      "oxlintrc_rules_react_rules_of_hooks",
+      "oxlintrc_schema"
+    ],
+    "7": [
+      "docs_frontend_build_instructions",
+      "index_html",
+      "src_assets_hero_png"
+    ],
+    "8": [
+      "tsconfig",
+      "tsconfig_files",
+      "tsconfig_references"
+    ],
+    "9": [
+      "src_app",
+      "src_app_app"
+    ],
+    "10": [
+      "public_favicon_svg"
+    ],
+    "11": [
+      "public_icons_svg"
+    ],
+    "12": [
+      "readme_react_typescript_vite"
+    ],
+    "13": [
+      "src_assets_react_svg"
+    ],
+    "14": [
+      "src_assets_vite_svg"
+    ],
+    "15": [
+      "src_main"
+    ],
+    "16": [
+      "vite_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.09523809523809523,
+    "1": 0.10526315789473684,
+    "2": 0.11764705882352941,
+    "3": 0.16666666666666666,
+    "4": 0.18181818181818182,
+    "5": 0.3333333333333333,
+    "6": 0.3333333333333333,
+    "7": 0.6666666666666666,
+    "8": 0.6666666666666666,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0
+  },
+  "gods": [
+    {
+      "id": "tsconfig_app_compileroptions",
+      "label": "compilerOptions",
+      "degree": 18
+    },
+    {
+      "id": "tsconfig_node_compileroptions",
+      "label": "compilerOptions",
+      "degree": 15
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 6
+    },
+    {
+      "id": "oxlintrc_rules",
+      "label": "rules",
+      "degree": 3
+    },
+    {
+      "id": "src_assets_hero_png",
+      "label": "Hero Illustration Image",
+      "degree": 2
+    },
+    {
+      "id": "tsconfig_app_compileroptions_paths",
+      "label": "paths",
+      "degree": 2
+    },
+    {
+      "id": "oxlintrc_schema",
+      "label": "$schema",
+      "degree": 1
+    },
+    {
+      "id": "oxlintrc_plugins",
+      "label": "plugins",
+      "degree": 1
+    },
+    {
+      "id": "oxlintrc_rules_react_rules_of_hooks",
+      "label": "react/rules-of-hooks",
+      "degree": 1
+    },
+    {
+      "id": "oxlintrc_rules_react_only_export_components",
+      "label": "react/only-export-components",
+      "degree": 1
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Frontend Build Instructions Document",
+      "target": "Hero Illustration Image",
+      "source_files": [
+        "docs/FRONTEND-BUILD-INSTRUCTIONS.md",
+        "src/assets/hero.png"
+      ],
+      "confidence": "AMBIGUOUS",
+      "relation": "references",
+      "why": "ambiguous connection - not explicitly stated in source; crosses file types (doc \u2194 image); connects across different repos/directories"
+    },
+    {
+      "source": "HTML Entry Point",
+      "target": "Hero Illustration Image",
+      "source_files": [
+        "index.html",
+        "src/assets/hero.png"
+      ],
+      "confidence": "INFERRED",
+      "relation": "references",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc \u2194 image); connects across different repos/directories"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

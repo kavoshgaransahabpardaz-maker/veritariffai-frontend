@@ -1,0 +1,18 @@
+import type { components } from '@/lib/api/generated/schema'
+
+export type User = components['schemas']['UserResponse']
+export type Shipment = components['schemas']['ShipmentResponse']
+export type ShipmentCreate = components['schemas']['ShipmentCreate']
+export type ShipmentUpdate = components['schemas']['ShipmentUpdate']
+export type ExtractionResult = components['schemas']['ExtractionResultResponse']
+export type Classification = components['schemas']['ClassificationResponse']
+export type QAResponse = components['schemas']['QAResponse']
+export type CostBreakdown = components['schemas']['CostBreakdownResponse']
+export type ScreeningResult = components['schemas']['ScreeningResultResponse']
+export type OriginRule = components['schemas']['OriginRuleResponse']
+export type OriginResult = components['schemas']['OriginResultResponse']
+export type BomItem = components['schemas']['BomItemResponse']
+export type BomItemCreate = components['schemas']['BomItemCreate']
+export type DocumentSummary = components['schemas']['DocumentSummaryResponse']
+export type DocumentDetail = components['schemas']['DocumentResponse']
+export type DocType = components['schemas']['DocType']
