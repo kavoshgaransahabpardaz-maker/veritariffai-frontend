@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Link } from 'react-router-dom'
+import { CitationChain } from '@/components/common/CitationChain'
 import { CodeChip } from '@/components/common/CodeChip'
 import { ConfidenceBadge } from '@/components/common/ConfidenceBadge'
 import { EmptyState } from '@/components/common/EmptyState'
@@ -188,15 +189,25 @@ export function ClassificationPage() {
               {classificationQuery.isLoading ? (
                 <div className="h-28 animate-pulse rounded-2xl bg-[var(--surface-muted)]" />
               ) : classificationQuery.data ? (
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex flex-wrap items-center gap-3">
                     <CodeChip value={classificationQuery.data.hs_code ?? 'Pending'} />
-                    {classificationQuery.data.dual_use_flag !== null ? (
-                      <span className="text-sm text-[var(--muted)]">
-                        Dual-use flag: {classificationQuery.data.dual_use_flag ? 'Yes' : 'No'}
-                      </span>
-                    ) : null}
                   </div>
+                  {classificationQuery.data.controls && classificationQuery.data.controls.length > 0 ? (
+                    <div className="space-y-2">
+                      <p className="text-sm font-semibold text-[var(--ink)]">Controls</p>
+                      <div className="flex flex-wrap gap-2">
+                        {classificationQuery.data.controls.map((control, index) => (
+                          <span
+                            key={index}
+                            className="rounded-xl border border-[var(--border)] bg-[var(--surface-muted)] px-3 py-1 text-xs text-[var(--ink)]"
+                          >
+                            {control}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
                   {classificationQuery.data.description ? (
                     <p className="text-sm text-[var(--muted)]">{classificationQuery.data.description}</p>
                   ) : null}
@@ -205,6 +216,7 @@ export function ClassificationPage() {
                       {JSON.stringify(classificationQuery.data.official_data_json, null, 2)}
                     </pre>
                   ) : null}
+                  <CitationChain citations={classificationQuery.data.citation_chain} />
                 </div>
               ) : (
                 <EmptyState
@@ -221,7 +233,7 @@ export function ClassificationPage() {
               <form className="space-y-4" onSubmit={submitOverride}>
                 <label className="space-y-2 text-sm">
                   <span className="font-medium text-[var(--ink)]">HS code</span>
-                  <Input {...overrideForm.register('hsCode')} placeholder="6109.10" disabled={!extractionConfirmed} />
+                  <Input {...overrideForm.register('hsCode')} placeholder="7208.10" disabled={!extractionConfirmed} />
                   <p className="text-xs text-[var(--danger)]">{overrideForm.formState.errors.hsCode?.message}</p>
                 </label>
                 <label className="space-y-2 text-sm">

@@ -1,11 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import { CitationChain } from '@/components/common/CitationChain'
 import { ConfidenceBadge } from '@/components/common/ConfidenceBadge'
 import { EmptyState } from '@/components/common/EmptyState'
+import { QuotaStatus } from '@/components/common/QuotaStatus'
 import { SectionCard } from '@/components/common/SectionCard'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/features/auth/AuthProvider'
 import { useCostQuery } from '@/features/cost/hooks'
+import { useQuotaQuery } from '@/features/quota/hooks'
 import { useExtractionQuery } from '@/features/intake/hooks'
 import { useWorkspaceShipment } from '@/features/shipments/workspace'
 import { getCost } from '@/lib/api/cost'
@@ -18,6 +21,7 @@ export function CostPage() {
   const queryClient = useQueryClient()
   const extractionQuery = useExtractionQuery(auth.tokens?.accessToken, shipment.id)
   const costQuery = useCostQuery(auth.tokens?.accessToken, shipment.id)
+  const quotaQuery = useQuotaQuery(auth.tokens?.accessToken, shipment.id)
 
   const refreshMutation = useMutation({
     mutationFn: () => getCost(auth.tokens!.accessToken, shipment.id, true),
@@ -57,8 +61,8 @@ export function CostPage() {
 
       <SectionCard
         title="Cost"
-        eyebrow="VAT-forward"
-        description="The client does not compute duty or VAT locally. It renders backend values and disclaimer."
+        eyebrow="Duty + quota-forward"
+        description="The client does not compute duty, VAT or quota locally. It renders backend values and disclaimer."
         actions={
           <Button
             variant="outline"
@@ -79,22 +83,11 @@ export function CostPage() {
           <div className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-white px-5 py-5">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">Import VAT</p>
-                <p className="mt-2 text-3xl font-semibold text-[var(--ink)]">
-                  {formatCurrency(costQuery.data.import_vat, shipment.currency)}
-                </p>
-                <p className="mt-2 text-sm text-[var(--muted)]">VAT treatment: {costQuery.data.vat_treatment}</p>
-              </div>
-              <ConfidenceBadge tier={normalizeConfidence(costQuery.data.confidence)} reason={costQuery.data.confidence_reason} />
-            </div>
-
-            <div className="grid gap-4 lg:grid-cols-2">
-              <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] px-5 py-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">Duty</p>
-                <div className="mt-3 space-y-3">
+                <div className="mt-3 space-y-2">
                   <div className="flex items-center justify-between gap-3 text-sm">
-                    <span className="text-[var(--muted)]">Preferential duty (if origin qualifies)</span>
-                    <span className="font-semibold text-[var(--ink)]">
+                    <span className="text-[var(--muted)]">Preferential (if origin qualifies)</span>
+                    <span className="font-semibold text-[var(--ink)] text-2xl">
                       {formatCurrency(costQuery.data.duty_preferential, shipment.currency)}
                     </span>
                   </div>
@@ -105,6 +98,26 @@ export function CostPage() {
                     </span>
                   </div>
                 </div>
+              </div>
+              <ConfidenceBadge tier={normalizeConfidence(costQuery.data.confidence)} reason={costQuery.data.confidence_reason} />
+            </div>
+
+            {quotaQuery.data ? (
+              <QuotaStatus status={quotaQuery.data.status} headroom={quotaQuery.data.headroom} />
+            ) : costQuery.data.safeguard_quota ? (
+              <QuotaStatus
+                status={costQuery.data.safeguard_quota.status}
+                headroom={costQuery.data.safeguard_quota.headroom}
+              />
+            ) : null}
+
+            <div className="grid gap-4 lg:grid-cols-2">
+              <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] px-5 py-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">Import VAT</p>
+                <p className="mt-2 text-xl font-semibold text-[var(--ink)]">
+                  {formatCurrency(costQuery.data.import_vat, shipment.currency)}
+                </p>
+                <p className="mt-2 text-sm text-[var(--muted)]">VAT treatment: {costQuery.data.vat_treatment}</p>
               </div>
 
               <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] px-5 py-5">
@@ -118,6 +131,8 @@ export function CostPage() {
                 ) : null}
               </div>
             </div>
+
+            <CitationChain citations={costQuery.data.citations} />
 
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] px-5 py-5 text-sm text-[var(--muted)]">
               {costQuery.data.disclaimer}

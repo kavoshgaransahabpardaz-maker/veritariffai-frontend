@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { EmptyState } from '@/components/common/EmptyState'
 import { FieldConfirmTable } from '@/components/common/FieldConfirmTable'
+import { MtcAuditPanel } from '@/components/common/MtcAuditPanel'
+import { MtcUpload } from '@/components/common/MtcUpload'
 import { SectionCard } from '@/components/common/SectionCard'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
@@ -12,7 +14,9 @@ import {
   useConfirmFieldsMutation,
   useDescribeShipmentMutation,
   useExtractionQuery,
+  useMtcQuery,
   useUploadInvoiceMutation,
+  useUploadMtcMutation,
 } from '@/features/intake/hooks'
 import { useWorkspaceShipment } from '@/features/shipments/workspace'
 import { isRecord } from '@/lib/utils'
@@ -27,11 +31,14 @@ export function IntakePage() {
   const { shipment } = useWorkspaceShipment()
   const auth = useAuth()
   const extractionQuery = useExtractionQuery(auth.tokens?.accessToken, shipment.id)
+  const mtcQuery = useMtcQuery(auth.tokens?.accessToken, shipment.id)
   const describeMutation = useDescribeShipmentMutation(auth.tokens?.accessToken, shipment.id)
-  const uploadMutation = useUploadInvoiceMutation(auth.tokens?.accessToken, shipment.id)
+  const uploadInvoiceMutation = useUploadInvoiceMutation(auth.tokens?.accessToken, shipment.id)
+  const uploadMtcMutation = useUploadMtcMutation(auth.tokens?.accessToken, shipment.id)
   const confirmMutation = useConfirmFieldsMutation(auth.tokens?.accessToken, shipment.id)
   const [editableFields, setEditableFields] = useState<Record<string, unknown>>({})
-  const [uploadError, setUploadError] = useState<string | null>(null)
+  const [invoiceUploadError, setInvoiceUploadError] = useState<string | null>(null)
+  const [mtcUploadError, setMtcUploadError] = useState<string | null>(null)
 
   const form = useForm<DescribeValues>({
     resolver: zodResolver(describeSchema),
@@ -48,31 +55,40 @@ export function IntakePage() {
     await describeMutation.mutateAsync(values.description)
   })
 
-  async function handleUpload(event: React.ChangeEvent<HTMLInputElement>) {
+  async function handleInvoiceUpload(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
     if (!file) {
       return
     }
 
-    setUploadError(null)
+    setInvoiceUploadError(null)
 
     try {
-      await uploadMutation.mutateAsync(file)
+      await uploadInvoiceMutation.mutateAsync(file)
     } catch {
-      setUploadError('Upload failed. Check the file type and backend extractor status, then retry.')
+      setInvoiceUploadError('Upload failed. Check the file type and backend extractor status, then retry.')
     } finally {
       event.target.value = ''
+    }
+  }
+
+  async function handleMtcUpload(file: File) {
+    setMtcUploadError(null)
+    try {
+      await uploadMtcMutation.mutateAsync(file)
+    } catch {
+      setMtcUploadError('MTC upload failed.')
     }
   }
 
   return (
     <div className="space-y-6">
       <SectionCard
-        title="Describe the goods or upload an invoice"
+        title="Describe goods, upload invoice, and upload MTC"
         description="Downstream sections stay gated until extracted fields are confirmed."
         eyebrow="Intake"
       >
-        <div className="grid gap-4 xl:grid-cols-2">
+        <div className="grid gap-4 xl:grid-cols-3">
           <form
             className="space-y-4 rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] p-5"
             onSubmit={submitDescription}
@@ -87,7 +103,7 @@ export function IntakePage() {
               <span className="font-medium text-[var(--ink)]">Goods description</span>
               <Textarea
                 {...form.register('description')}
-                placeholder="Women's cotton knit sweaters, boxed in units of 20, shipped from Germany to the UK."
+                placeholder="Steel products, HS 72/73, shipped from..."
               />
               <p className="text-xs text-[var(--danger)]">{form.formState.errors.description?.message}</p>
             </label>
@@ -100,26 +116,41 @@ export function IntakePage() {
             <div>
               <h3 className="text-lg font-semibold text-[var(--ink)]">Upload invoice</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                This slice uses a direct file input. Drag/drop, previews, and multi-page PDF review are next decisions.
+                Upload your invoice for extraction.
               </p>
             </div>
             <label className="flex cursor-pointer flex-col items-center justify-center rounded-2xl border border-dashed border-[var(--border-strong)] bg-white px-6 py-12 text-center">
               <span className="text-sm font-medium text-[var(--ink)]">Choose a PDF or image invoice</span>
               <span className="mt-2 text-xs text-[var(--muted)]">PDF, PNG, JPG, JPEG</span>
-              <input className="sr-only" type="file" accept=".pdf,.png,.jpg,.jpeg" onChange={handleUpload} />
+              <input
+                className="sr-only"
+                type="file"
+                accept=".pdf,.png,.jpg,.jpeg"
+                onChange={handleInvoiceUpload}
+                disabled={uploadInvoiceMutation.isPending}
+              />
             </label>
-            <p className="text-xs text-[var(--muted)]">Extraction source: invoice upload posts directly to the live multipart endpoint.</p>
-            {uploadError ? <p className="text-sm text-[var(--danger)]">{uploadError}</p> : null}
+            {uploadInvoiceMutation.isPending && (
+              <p className="text-sm text-[var(--ink)]">Uploading and extracting...</p>
+            )}
+            {invoiceUploadError ? <p className="text-sm text-[var(--danger)]">{invoiceUploadError}</p> : null}
           </div>
+
+          <MtcUpload
+            onUpload={handleMtcUpload}
+            isPending={uploadMtcMutation.isPending}
+            error={mtcUploadError}
+          />
         </div>
       </SectionCard>
 
+      {/* Extraction fields confirm */}
       {extractionQuery.isLoading ? (
         <div className="h-64 animate-pulse rounded-[2rem] bg-[var(--surface-muted)]" />
       ) : extractionQuery.data?.status === 'pending' ? (
         <SectionCard
           title="Extraction in progress"
-          description="The page polls the backend until fields are ready. Classification, cost, and origin remain unavailable until you confirm them."
+          description="The page polls the backend until fields are ready."
         >
           <div className="grid gap-4 md:grid-cols-3">
             {Array.from({ length: 3 }).map((_, index) => (
@@ -155,9 +186,28 @@ export function IntakePage() {
       ) : (
         <EmptyState
           title="No extraction yet"
-          description="Start with a plain-language description or upload an invoice, then confirm the extracted fields before moving on."
+          description="Start with a plain-language description, upload an invoice and MTC, then confirm fields."
         />
       )}
+
+      {/* MTC audit panel */}
+      {mtcQuery.isLoading ? (
+        <SectionCard title="MTC extraction in progress">
+          <div className="h-32 animate-pulse rounded-2xl bg-[var(--surface-muted)]" />
+        </SectionCard>
+      ) : mtcQuery.data ? (
+        <SectionCard title="Mill Test Certificate (MTC) Audit">
+          <MtcAuditPanel
+            heatNumber={mtcQuery.data.heat_number}
+            meltCountry={mtcQuery.data.melt_country}
+            pourCountry={mtcQuery.data.pour_country}
+            chemicalComposition={mtcQuery.data.chemical_composition_json}
+            mechanicalProperties={mtcQuery.data.mechanical_properties_json}
+            perFieldConfidence={mtcQuery.data.per_field_confidence_json}
+            status={mtcQuery.data.status}
+          />
+        </SectionCard>
+      ) : null}
     </div>
   )
 }

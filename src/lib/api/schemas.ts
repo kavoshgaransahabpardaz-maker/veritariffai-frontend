@@ -63,6 +63,14 @@ export const qaSchema = z
   })
   .passthrough()
 
+// Citation schema for new CitationChain
+export const citationSchema = z
+  .object({
+    text: z.string(),
+    source_ref: z.string().nullable().optional(),
+  })
+  .passthrough()
+
 export const classificationSchema = z
   .object({
     id: z.string(),
@@ -72,7 +80,8 @@ export const classificationSchema = z
     confidence: confidenceStringSchema,
     source: z.enum(['assistant', 'override']),
     official_data_json: z.record(z.string(), z.unknown()).nullable(),
-    dual_use_flag: z.boolean().nullable(),
+    controls: z.array(z.string()).nullable(),
+    citation_chain: z.array(citationSchema).nullable(),
     created_at: z.string(),
   })
   .passthrough()
@@ -87,12 +96,17 @@ export const costSchema = z
     import_vat: z.string().nullable(),
     other_fees_json: z.record(z.string(), z.unknown()).nullable(),
     vat_treatment: z.enum(['standard', 'pva', 'reclaimable']),
+    safeguard_quota: z.object({
+      status: z.enum(['available', 'low', 'exhausted']),
+      headroom: z.string().nullable(),
+    }).nullable(),
     as_of: z.string(),
     computed_at: z.string(),
     confidence: confidenceStringSchema,
     confidence_reason: z.string(),
     disclaimer: z.string(),
     not_a_customs_ruling: z.boolean(),
+    citations: z.array(citationSchema).nullable(),
     intrastat_note: z.string().nullable().optional(),
   })
   .passthrough()
@@ -146,6 +160,9 @@ export const originResultSchema = z
     non_originating_pct: z.string().nullable(),
     cap_pct: z.string().nullable(),
     margin_pct: z.string().nullable(),
+    melt_country: z.string().nullable(),
+    pour_country: z.string().nullable(),
+    melt_pour_qualifies: z.boolean().nullable(),
     treated_conservatively: z.boolean(),
     blocking_items_json: z.array(z.record(z.string(), z.unknown())).nullable(),
     confidence: confidenceStringSchema,
@@ -154,6 +171,7 @@ export const originResultSchema = z
     evaluated_at: z.string(),
     disclaimer: z.string(),
     not_a_customs_ruling: z.boolean(),
+    citations: z.array(citationSchema).nullable(),
   })
   .passthrough()
 
@@ -180,6 +198,47 @@ export const documentDetailSchema = z
     evidence_refs_json: z.array(z.unknown()).nullable(),
     created_at: z.string(),
     updated_at: z.string().nullable(),
+  })
+  .passthrough()
+
+// MTC schema
+export const mtcSchema = z
+  .object({
+    id: z.string(),
+    shipment_id: z.string(),
+    raw_ref: z.string().nullable(),
+    heat_number: z.string().nullable(),
+    melt_country: z.string().nullable(),
+    pour_country: z.string().nullable(),
+    chemical_composition_json: z.record(z.string(), z.unknown()).nullable(),
+    mechanical_properties_json: z.record(z.string(), z.unknown()).nullable(),
+    per_field_confidence_json: z.record(z.string(), z.unknown()).nullable(),
+    status: z.enum(['pending', 'done', 'failed', 'needs_human_review']),
+    created_at: z.string(),
+  })
+  .passthrough()
+
+// Quota schema
+export const quotaSchema = z
+  .object({
+    id: z.string(),
+    shipment_id: z.string(),
+    status: z.enum(['available', 'low', 'exhausted']),
+    headroom: z.string().nullable(),
+    quota_year: z.number().nullable(),
+  })
+  .passthrough()
+
+// Bundle schema
+export const bundleSchema = z
+  .object({
+    id: z.string(),
+    shipment_id: z.string(),
+    status: z.enum(['pending', 'ready', 'failed']),
+    sha256: z.string().nullable(),
+    disclaimer: z.string().nullable(),
+    download_ref: z.string().nullable(),
+    created_at: z.string(),
   })
   .passthrough()
 
