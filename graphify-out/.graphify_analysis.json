@@ -1,6 +1,160 @@
 {
   "communities": {
     "0": [
+      "api_auth",
+      "api_auth_getgoogleauthurl",
+      "api_auth_getme",
+      "api_classification",
+      "api_classification_answerclassification",
+      "api_classification_getclassification",
+      "api_classification_overrideclassification",
+      "api_classification_startclassification",
+      "api_client",
+      "api_client_apierror",
+      "api_client_apierror_constructor",
+      "api_client_apirequest",
+      "api_client_buildurl",
+      "api_client_queryvalue",
+      "api_client_requestoptions",
+      "api_cost",
+      "api_cost_getcost",
+      "api_documents",
+      "api_documents_certifydocument",
+      "api_documents_generatedocument",
+      "api_documents_getdocument",
+      "api_documents_listdocuments",
+      "api_documents_requestdeclaration",
+      "api_intake",
+      "api_intake_confirmfields",
+      "api_intake_describeshipment",
+      "api_intake_getextraction",
+      "api_intake_uploadinvoice",
+      "api_origin",
+      "api_origin_evaluateorigin",
+      "api_origin_getoriginresult",
+      "api_origin_getoriginrule",
+      "api_origin_setbom",
+      "api_report",
+      "api_report_getreport",
+      "api_screening",
+      "api_screening_getscreening",
+      "api_screening_runscreening",
+      "api_shipments",
+      "api_shipments_createshipment",
+      "api_shipments_getshipment",
+      "api_shipments_listshipments",
+      "api_shipments_updateshipment"
+    ],
+    "1": [
+      "auth_authprovider_useauth",
+      "routes_applayout",
+      "routes_applayout_applayout",
+      "routes_authcallbackpage",
+      "routes_authcallbackpage_authcallbackpage",
+      "routes_loginpage",
+      "routes_loginpage_loginpage",
+      "routes_newshipmentpage",
+      "routes_newshipmentpage_newshipmentpage",
+      "routes_newshipmentpage_shipmentformschema",
+      "routes_newshipmentpage_shipmentformvalues",
+      "routes_screeningpage",
+      "routes_screeningpage_screeningpage",
+      "routes_shipmentspage",
+      "routes_shipmentspage_shipmentspage",
+      "routes_shipmentworkspacelayout",
+      "routes_shipmentworkspacelayout_shipmentworkspacelayout",
+      "routes_shipmentworkspacelayout_stepitems",
+      "screening_hooks",
+      "screening_hooks_userunscreeningmutation",
+      "screening_hooks_usescreeningquery",
+      "shipments_hooks",
+      "shipments_hooks_usecreateshipmentmutation",
+      "shipments_hooks_useshipmentquery",
+      "shipments_hooks_useshipmentsquery",
+      "shipments_hooks_useupdateshipmentmutation",
+      "src_router",
+      "src_router_protectedlayout",
+      "src_router_router"
+    ],
+    "2": [
+      "package",
+      "package_devdependencies",
+      "package_devdependencies_emnapi_core",
+      "package_devdependencies_emnapi_runtime",
+      "package_devdependencies_openapi_typescript",
+      "package_devdependencies_oxlint",
+      "package_devdependencies_tailwindcss",
+      "package_devdependencies_tailwindcss_vite",
+      "package_devdependencies_types_node",
+      "package_devdependencies_types_react",
+      "package_devdependencies_types_react_dom",
+      "package_devdependencies_typescript",
+      "package_devdependencies_vite",
+      "package_devdependencies_vite_tsconfig_paths",
+      "package_devdependencies_vitejs_plugin_react",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_generate_api",
+      "package_scripts_lint",
+      "package_scripts_preview",
+      "package_type",
+      "package_version"
+    ],
+    "3": [
+      "api_schemas",
+      "api_schemas_apierrorschema",
+      "api_schemas_bomitemlistschema",
+      "api_schemas_bomitemschema",
+      "api_schemas_classificationschema",
+      "api_schemas_confidencestringschema",
+      "api_schemas_costschema",
+      "api_schemas_documentdetailschema",
+      "api_schemas_documentsummarylistschema",
+      "api_schemas_documentsummaryschema",
+      "api_schemas_extractionschema",
+      "api_schemas_genericobjectschema",
+      "api_schemas_googleauthurlschema",
+      "api_schemas_laneschema",
+      "api_schemas_originresultschema",
+      "api_schemas_originruleschema",
+      "api_schemas_qaschema",
+      "api_schemas_requestokschema",
+      "api_schemas_screeningresultlistschema",
+      "api_schemas_screeningresultschema",
+      "api_schemas_shipmentlistschema",
+      "api_schemas_shipmentschema",
+      "api_schemas_shipmentstatusschema",
+      "api_schemas_userschema"
+    ],
+    "4": [
+      "common_codechip",
+      "common_codechip_codechip",
+      "common_codechip_codechipprops",
+      "common_confidencebadge",
+      "common_confidencebadge_confidencebadge",
+      "common_confidencebadge_confidencebadgeprops",
+      "common_sectioncard",
+      "common_sectioncard_sectioncard",
+      "common_sectioncard_sectioncardprops",
+      "common_statuspill",
+      "common_statuspill_statuspill",
+      "common_statuspill_statuspillprops",
+      "common_statuspill_statusstyles",
+      "lib_utils_cn",
+      "lib_utils_formatlabel",
+      "ui_button",
+      "ui_button_button",
+      "ui_button_buttonprops",
+      "ui_button_buttonvariants",
+      "ui_input",
+      "ui_input_input",
+      "ui_textarea",
+      "ui_textarea_textarea"
+    ],
+    "5": [
       "tsconfig_app",
       "tsconfig_app_compileroptions",
       "tsconfig_app_compileroptions_allowimportingtsextensions",
@@ -23,7 +177,51 @@
       "tsconfig_app_include",
       "tsconfig_app_paths"
     ],
-    "1": [
+    "6": [
+      "common_headlinechips",
+      "common_headlinechips_headlinechips",
+      "common_headlinechips_headlinechipsprops",
+      "intake_hooks",
+      "intake_hooks_useconfirmfieldsmutation",
+      "intake_hooks_usedescribeshipmentmutation",
+      "intake_hooks_useextractionquery",
+      "intake_hooks_useuploadinvoicemutation",
+      "lib_utils_isrecord",
+      "report_hooks",
+      "report_hooks_usereportquery",
+      "routes_intakepage",
+      "routes_intakepage_describeschema",
+      "routes_intakepage_describevalues",
+      "routes_intakepage_intakepage",
+      "routes_reportpage",
+      "routes_reportpage_reportpage",
+      "shipments_workspace",
+      "shipments_workspace_useworkspaceshipment",
+      "shipments_workspace_workspacecontextvalue"
+    ],
+    "7": [
+      "common_marginbar",
+      "common_marginbar_marginbar",
+      "common_marginbar_marginbarprops",
+      "cost_hooks",
+      "cost_hooks_usecostquery",
+      "documents_hooks",
+      "documents_hooks_usecertifydocumentmutation",
+      "documents_hooks_usedocumentquery",
+      "documents_hooks_usedocumentsquery",
+      "documents_hooks_usegeneratedocumentmutation",
+      "documents_hooks_userequestdeclarationmutation",
+      "lib_utils",
+      "lib_utils_cleanoptionalnumber",
+      "lib_utils_formatcurrency",
+      "lib_utils_formatdatetime",
+      "lib_utils_formatpercent",
+      "routes_costpage",
+      "routes_costpage_costpage",
+      "routes_documentspage",
+      "routes_documentspage_documentspage"
+    ],
+    "8": [
       "package_dependencies",
       "package_dependencies_class_variance_authority",
       "package_dependencies_clsx",
@@ -44,7 +242,26 @@
       "package_dependencies_tanstack_react_query_devtools",
       "package_dependencies_zod"
     ],
-    "2": [
+    "9": [
+      "api_types",
+      "api_types_bomitem",
+      "api_types_bomitemcreate",
+      "api_types_classification",
+      "api_types_costbreakdown",
+      "api_types_doctype",
+      "api_types_documentdetail",
+      "api_types_documentsummary",
+      "api_types_extractionresult",
+      "api_types_originresult",
+      "api_types_originrule",
+      "api_types_qaresponse",
+      "api_types_screeningresult",
+      "api_types_shipment",
+      "api_types_shipmentcreate",
+      "api_types_shipmentupdate",
+      "api_types_user"
+    ],
+    "10": [
       "tsconfig_node",
       "tsconfig_node_compileroptions",
       "tsconfig_node_compileroptions_allowimportingtsextensions",
@@ -63,34 +280,53 @@
       "tsconfig_node_compileroptions_verbatimmodulesyntax",
       "tsconfig_node_include"
     ],
-    "3": [
-      "package_devdependencies",
-      "package_devdependencies_openapi_typescript",
-      "package_devdependencies_oxlint",
-      "package_devdependencies_tailwindcss",
-      "package_devdependencies_tailwindcss_vite",
-      "package_devdependencies_types_node",
-      "package_devdependencies_types_react",
-      "package_devdependencies_types_react_dom",
-      "package_devdependencies_typescript",
-      "package_devdependencies_vite",
-      "package_devdependencies_vite_tsconfig_paths",
-      "package_devdependencies_vitejs_plugin_react"
+    "11": [
+      "common_fieldconfirmtable",
+      "common_fieldconfirmtable_fieldconfirmtable",
+      "common_fieldconfirmtable_fieldconfirmtableprops",
+      "common_fieldconfirmtable_getfieldmeta",
+      "lib_confidence",
+      "lib_confidence_confidencemeta",
+      "lib_confidence_confidencetier",
+      "lib_confidence_normalizeconfidence",
+      "origin_hooks",
+      "origin_hooks_useevaluateoriginmutation",
+      "origin_hooks_useoriginresultquery",
+      "origin_hooks_useoriginrulequery",
+      "origin_hooks_usesetbommutation",
+      "routes_originpage",
+      "routes_originpage_defaultbomitem",
+      "routes_originpage_originpage"
     ],
-    "4": [
-      "package",
-      "package_name",
-      "package_private",
-      "package_scripts",
-      "package_scripts_build",
-      "package_scripts_dev",
-      "package_scripts_generate_api",
-      "package_scripts_lint",
-      "package_scripts_preview",
-      "package_type",
-      "package_version"
+    "12": [
+      "docs_frontend_build_instructions",
+      "docs_frontend_build_instructions_10_build_order_milestones",
+      "docs_frontend_build_instructions_11_quality_bar",
+      "docs_frontend_build_instructions_12_open_decisions_to_surface_don_t_silently_choose",
+      "docs_frontend_build_instructions_1_mission",
+      "docs_frontend_build_instructions_2_tech_stack_use_exactly_this_unless_blocked",
+      "docs_frontend_build_instructions_3_project_structure",
+      "docs_frontend_build_instructions_4_design_system",
+      "docs_frontend_build_instructions_5_shared_components_to_build_first",
+      "docs_frontend_build_instructions_6_routes_screens_map_to_the_journey",
+      "docs_frontend_build_instructions_7_key_screen_behaviors",
+      "docs_frontend_build_instructions_8_api_contract_owned_by_backend_match_exactly",
+      "docs_frontend_build_instructions_9_guardrails_for_the_agent_do_not_violate",
+      "docs_frontend_build_instructions_frontend_build_instructions_trade_compliance_co_pilot_react_typescript",
+      "index_html",
+      "src_assets_hero_png"
     ],
-    "5": [
+    "13": [
+      "auth_authprovider",
+      "auth_authprovider_authcontext",
+      "auth_authprovider_authcontextvalue",
+      "auth_authprovider_authprovider",
+      "auth_authprovider_authtokens",
+      "auth_authprovider_consumetokensfromlocation",
+      "auth_authprovider_persisttokens",
+      "auth_authprovider_readstoredtokens"
+    ],
+    "14": [
       "generated_schema",
       "generated_schema_components",
       "generated_schema_defs",
@@ -98,7 +334,7 @@
       "generated_schema_paths",
       "generated_schema_webhooks"
     ],
-    "6": [
+    "15": [
       "oxlintrc",
       "oxlintrc_plugins",
       "oxlintrc_rules",
@@ -106,62 +342,137 @@
       "oxlintrc_rules_react_rules_of_hooks",
       "oxlintrc_schema"
     ],
-    "7": [
-      "docs_frontend_build_instructions",
-      "index_html",
-      "src_assets_hero_png"
+    "16": [
+      "classification_hooks",
+      "classification_hooks_useanswerclassificationmutation",
+      "classification_hooks_useclassificationquery",
+      "classification_hooks_useoverrideclassificationmutation",
+      "classification_hooks_usestartclassificationmutation"
     ],
-    "8": [
+    "17": [
+      "common_bomtable",
+      "common_bomtable_bomtable",
+      "common_bomtable_bomtableprops",
+      "common_bomtable_editablebomitem"
+    ],
+    "18": [
+      "common_stepper",
+      "common_stepper_stepper",
+      "common_stepper_stepperitem",
+      "common_stepper_stepperprops"
+    ],
+    "19": [
+      "routes_classificationpage",
+      "routes_classificationpage_overridevalues",
+      "routes_classificationpage_sendanswer",
+      "routes_classificationpage_startflow"
+    ],
+    "20": [
+      "common_emptystate",
+      "common_emptystate_emptystate",
+      "common_emptystate_emptystateprops"
+    ],
+    "21": [
+      "dockercomposeprod_edge",
+      "dockercomposeprod_frontend",
+      "readme_frontend"
+    ],
+    "22": [
+      "routes_placeholderpage",
+      "routes_placeholderpage_placeholderpage",
+      "routes_placeholderpage_placeholderpageprops"
+    ],
+    "23": [
       "tsconfig",
       "tsconfig_files",
       "tsconfig_references"
     ],
-    "9": [
+    "24": [
+      "lib_queryclient",
+      "lib_queryclient_queryclient"
+    ],
+    "25": [
+      "routes_notfoundpage",
+      "routes_notfoundpage_notfoundpage"
+    ],
+    "26": [
+      "scripts_init_letsencrypt",
+      "users_behnam_vscode_veritarifai_front_scripts_init_letsencrypt_sh__entry"
+    ],
+    "27": [
+      "scripts_renew_letsencrypt",
+      "users_behnam_vscode_veritarifai_front_scripts_renew_letsencrypt_sh__entry"
+    ],
+    "28": [
       "src_app",
       "src_app_app"
     ],
-    "10": [
+    "29": [
+      "dockercomposeprod_certbot"
+    ],
+    "30": [
       "public_favicon_svg"
     ],
-    "11": [
+    "31": [
       "public_icons_svg"
     ],
-    "12": [
-      "readme_react_typescript_vite"
-    ],
-    "13": [
+    "32": [
       "src_assets_react_svg"
     ],
-    "14": [
+    "33": [
       "src_assets_vite_svg"
     ],
-    "15": [
+    "34": [
       "src_main"
     ],
-    "16": [
+    "35": [
       "vite_config"
     ]
   },
   "cohesion": {
-    "0": 0.09523809523809523,
-    "1": 0.10526315789473684,
-    "2": 0.11764705882352941,
-    "3": 0.16666666666666666,
-    "4": 0.18181818181818182,
-    "5": 0.3333333333333333,
-    "6": 0.3333333333333333,
-    "7": 0.6666666666666666,
-    "8": 0.6666666666666666,
-    "9": 1.0,
-    "10": 1.0,
-    "11": 1.0,
-    "12": 1.0,
-    "13": 1.0,
-    "14": 1.0,
-    "15": 1.0,
-    "16": 1.0
+    "0": 0.06755260243632337,
+    "1": 0.07635467980295567,
+    "2": 0.08,
+    "3": 0.08333333333333333,
+    "4": 0.09090909090909091,
+    "5": 0.09523809523809523,
+    "6": 0.12105263157894737,
+    "7": 0.12631578947368421,
+    "8": 0.10526315789473684,
+    "9": 0.11764705882352941,
+    "10": 0.11764705882352941,
+    "11": 0.15,
+    "12": 0.125,
+    "13": 0.2857142857142857,
+    "14": 0.3333333333333333,
+    "15": 0.3333333333333333,
+    "16": 0.4,
+    "17": 0.5,
+    "18": 0.5,
+    "19": 0.5,
+    "20": 0.6666666666666666,
+    "21": 1.0,
+    "22": 0.6666666666666666,
+    "23": 0.6666666666666666,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0
   },
   "gods": [
+    {
+      "id": "api_client_apirequest",
+      "label": "apiRequest()",
+      "degree": 29
+    },
     {
       "id": "tsconfig_app_compileroptions",
       "label": "compilerOptions",
@@ -173,58 +484,42 @@
       "degree": 15
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
-      "degree": 6
+      "id": "auth_authprovider_useauth",
+      "label": "useAuth()",
+      "degree": 14
     },
     {
-      "id": "oxlintrc_rules",
-      "label": "rules",
-      "degree": 3
+      "id": "docs_frontend_build_instructions_frontend_build_instructions_trade_compliance_co_pilot_react_typescript",
+      "label": "Frontend build instructions \u2014 Trade compliance co-pilot (React + TypeScript)",
+      "degree": 13
     },
     {
-      "id": "src_assets_hero_png",
-      "label": "Hero Illustration Image",
-      "degree": 2
+      "id": "routes_documentspage_documentspage",
+      "label": "DocumentsPage()",
+      "degree": 9
     },
     {
-      "id": "tsconfig_app_compileroptions_paths",
-      "label": "paths",
-      "degree": 2
+      "id": "routes_originpage_originpage",
+      "label": "OriginPage()",
+      "degree": 9
     },
     {
-      "id": "oxlintrc_schema",
-      "label": "$schema",
-      "degree": 1
+      "id": "lib_utils_cn",
+      "label": "cn()",
+      "degree": 8
     },
     {
-      "id": "oxlintrc_plugins",
-      "label": "plugins",
-      "degree": 1
+      "id": "routes_costpage_costpage",
+      "label": "CostPage()",
+      "degree": 8
     },
     {
-      "id": "oxlintrc_rules_react_rules_of_hooks",
-      "label": "react/rules-of-hooks",
-      "degree": 1
-    },
-    {
-      "id": "oxlintrc_rules_react_only_export_components",
-      "label": "react/only-export-components",
-      "degree": 1
+      "id": "routes_intakepage_intakepage",
+      "label": "IntakePage()",
+      "degree": 8
     }
   ],
   "surprises": [
-    {
-      "source": "Frontend Build Instructions Document",
-      "target": "Hero Illustration Image",
-      "source_files": [
-        "docs/FRONTEND-BUILD-INSTRUCTIONS.md",
-        "src/assets/hero.png"
-      ],
-      "confidence": "AMBIGUOUS",
-      "relation": "references",
-      "why": "ambiguous connection - not explicitly stated in source; crosses file types (doc \u2194 image); connects across different repos/directories"
-    },
     {
       "source": "HTML Entry Point",
       "target": "Hero Illustration Image",
@@ -235,10 +530,54 @@
       "confidence": "INFERRED",
       "relation": "references",
       "why": "inferred connection - not explicitly stated in source; crosses file types (doc \u2194 image); connects across different repos/directories"
+    },
+    {
+      "source": "CodeChip()",
+      "target": "cn()",
+      "source_files": [
+        "src/components/common/CodeChip.tsx",
+        "src/lib/utils.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; peripheral node `CodeChip()` unexpectedly reaches hub `cn()`"
+    },
+    {
+      "source": "ConfidenceBadge()",
+      "target": "cn()",
+      "source_files": [
+        "src/components/common/ConfidenceBadge.tsx",
+        "src/lib/utils.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; peripheral node `ConfidenceBadge()` unexpectedly reaches hub `cn()`"
+    },
+    {
+      "source": "getFieldMeta()",
+      "target": "isRecord()",
+      "source_files": [
+        "src/components/common/FieldConfirmTable.tsx",
+        "src/lib/utils.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "HeadlineChips()",
+      "target": "isRecord()",
+      "source_files": [
+        "src/components/common/HeadlineChips.tsx",
+        "src/lib/utils.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; peripheral node `HeadlineChips()` unexpectedly reaches hub `isRecord()`"
     }
   ],
   "tokens": {
-    "input": 0,
-    "output": 0
+    "input": 1885,
+    "output": 440
   }
 }
