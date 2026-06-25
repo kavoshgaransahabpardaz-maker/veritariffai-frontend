@@ -15,7 +15,7 @@ export const userSchema = z
     email: z.string().min(1),
     is_active: z.boolean(),
   })
-  .passthrough()
+  .loose()
 
 export const shipmentSchema = z
   .object({
@@ -34,7 +34,7 @@ export const shipmentSchema = z
     updated_at: z.string().nullable(),
     section_statuses: z.record(z.string(), z.string()),
   })
-  .passthrough()
+  .loose()
 
 export const shipmentListSchema = z.array(shipmentSchema)
 
@@ -50,26 +50,47 @@ export const extractionSchema = z
     confirmed: z.boolean(),
     created_at: z.string(),
   })
-  .passthrough()
+  .loose()
 
-export const qaSchema = z
-  .object({
-    question: z.string(),
-    options: z.array(z.string()).nullable().optional(),
-    state_token: z.string(),
-    is_complete: z.boolean(),
-    candidate_code: z.string().nullable().optional(),
-    confidence: confidenceStringSchema.nullable().optional(),
-  })
-  .passthrough()
-
-// Citation schema for new CitationChain
 export const citationSchema = z
   .object({
     text: z.string(),
     source_ref: z.string().nullable().optional(),
   })
-  .passthrough()
+  .loose()
+
+export const qaAttributeSchema = z
+  .object({
+    name: z.string(),
+    value: z.string(),
+    source: z.string().optional(),
+    confidence: confidenceStringSchema.nullable().optional(),
+    citation: z.string().nullable().optional(),
+  })
+  .loose()
+
+export const qaCandidateSchema = z
+  .object({
+    hs_code: z.string(),
+    description: z.string().nullable().optional(),
+    rationale: z.string().nullable().optional(),
+  })
+  .loose()
+
+export const qaSchema = z
+  .object({
+    question: z.string().optional(),
+    options: z.array(z.string()).nullable().optional(),
+    state_token: z.string(),
+    is_complete: z.boolean(),
+    candidate_code: z.string().nullable().optional(),
+    confidence: confidenceStringSchema.nullable().optional(),
+    auto_resolved: z.boolean().nullable().optional(),
+    citation_chain: z.array(citationSchema).nullable().optional(),
+    alternatives: z.array(qaCandidateSchema).nullable().optional(),
+    attributes: z.array(qaAttributeSchema).nullable().optional(),
+  })
+  .loose()
 
 export const classificationSchema = z
   .object({
@@ -84,7 +105,7 @@ export const classificationSchema = z
     citation_chain: z.array(citationSchema).nullable(),
     created_at: z.string(),
   })
-  .passthrough()
+  .loose()
 
 export const costSchema = z
   .object({
@@ -109,7 +130,7 @@ export const costSchema = z
     citations: z.array(citationSchema).nullable(),
     intrastat_note: z.string().nullable().optional(),
   })
-  .passthrough()
+  .loose()
 
 export const screeningResultSchema = z
   .object({
@@ -121,7 +142,7 @@ export const screeningResultSchema = z
     match_json: z.record(z.string(), z.unknown()).nullable(),
     screened_at: z.string(),
   })
-  .passthrough()
+  .loose()
 
 export const screeningResultListSchema = z.array(screeningResultSchema)
 
@@ -135,7 +156,7 @@ export const bomItemSchema = z
     value: z.string(),
     supplier_declaration_status: z.enum(['on_file', 'pending', 'none']),
   })
-  .passthrough()
+  .loose()
 
 export const bomItemListSchema = z.array(bomItemSchema)
 
@@ -148,7 +169,7 @@ export const originRuleSchema = z
     rule_json: z.record(z.string(), z.unknown()),
     source_ref: z.string(),
   })
-  .passthrough()
+  .loose()
 
 export const originResultSchema = z
   .object({
@@ -173,7 +194,7 @@ export const originResultSchema = z
     not_a_customs_ruling: z.boolean(),
     citations: z.array(citationSchema).nullable(),
   })
-  .passthrough()
+  .loose()
 
 export const documentSummarySchema = z
   .object({
@@ -182,7 +203,7 @@ export const documentSummarySchema = z
     status: z.enum(['not_started', 'needs_input', 'ready', 'certified', 'blocked']),
     blocker: z.string().nullable(),
   })
-  .passthrough()
+  .loose()
 
 export const documentSummaryListSchema = z.array(documentSummarySchema)
 
@@ -199,7 +220,7 @@ export const documentDetailSchema = z
     created_at: z.string(),
     updated_at: z.string().nullable(),
   })
-  .passthrough()
+  .loose()
 
 // MTC schema
 export const mtcSchema = z
@@ -216,7 +237,7 @@ export const mtcSchema = z
     status: z.enum(['pending', 'done', 'failed', 'needs_human_review']),
     created_at: z.string(),
   })
-  .passthrough()
+  .loose()
 
 // Quota schema
 export const quotaSchema = z
@@ -227,7 +248,7 @@ export const quotaSchema = z
     headroom: z.string().nullable(),
     quota_year: z.number().nullable(),
   })
-  .passthrough()
+  .loose()
 
 // Bundle schema
 export const bundleSchema = z
@@ -240,7 +261,7 @@ export const bundleSchema = z
     download_ref: z.string().nullable(),
     created_at: z.string(),
   })
-  .passthrough()
+  .loose()
 
 export const requestOkSchema = z.record(z.string(), z.unknown())
 
@@ -250,4 +271,4 @@ export const apiErrorSchema = z
   .object({
     detail: z.array(z.object({ msg: z.string() })).optional(),
   })
-  .passthrough()
+  .loose()

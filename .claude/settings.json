@@ -1,4 +1,15 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls:*)",
+      "Bash(rtk find:*)",
+      "Bash(rtk read:*)",
+      "Bash(rtk grep:*)",
+      "Bash(node -e \"console.log\\(require\\('/Users/behnam/vscode/veritarifai-front/node_modules/zod/package.json'\\).version\\)\")",
+      "Bash(rtk npm:*)",
+      "Bash(rtk tsc:*)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -19,11 +30,6 @@
           }
         ]
       }
-    ]
-  },
-  "permissions": {
-    "allow": [
-      "Bash(rtk ls:*)"
     ]
   }
 }
