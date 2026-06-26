@@ -1,12 +1,8 @@
-import { CheckCircle } from 'lucide-react'
+import { CheckCircle, Info } from 'lucide-react'
 import { CitationChain } from '@/components/common/CitationChain'
 import { ConfidenceBadge } from '@/components/common/ConfidenceBadge'
 import { type ConfidenceTier } from '@/lib/confidence'
-
-type Citation = {
-  text: string
-  source_ref?: string | null
-}
+import type { Citation } from '@/lib/api/types'
 
 type CodeResultProps = {
   hsCode: string
@@ -15,6 +11,9 @@ type CodeResultProps = {
   confidenceReason?: string | null
   autoResolved?: boolean | null
   citationChain?: Citation[] | null
+  whyText?: string | null
+  treeVersion?: string | null
+  nomenclatureVersion?: string | null
   onConfirm?: () => void
   isConfirming?: boolean
 }
@@ -26,9 +25,14 @@ export function CodeResult({
   confidenceReason,
   autoResolved,
   citationChain,
+  whyText,
+  treeVersion,
+  nomenclatureVersion,
   onConfirm,
   isConfirming,
 }: CodeResultProps) {
+  const hasVersionInfo = treeVersion || nomenclatureVersion
+
   return (
     <div className="space-y-4">
       <div className="rounded-2xl border border-[var(--border)] bg-white p-5">
@@ -51,6 +55,15 @@ export function CodeResult({
             {description ? (
               <p className="mt-2 text-sm text-[var(--muted)]">{description}</p>
             ) : null}
+            {hasVersionInfo ? (
+              <div
+                className="mt-2 flex items-center gap-1.5 text-xs text-[var(--muted)]"
+                title={`Decision tree: ${treeVersion ?? '—'} · Nomenclature: ${nomenclatureVersion ?? '—'}`}
+              >
+                <Info className="h-3.5 w-3.5 shrink-0" />
+                <span>Tree v{treeVersion ?? '—'} · Nomenclature {nomenclatureVersion ?? '—'}</span>
+              </div>
+            ) : null}
           </div>
           <ConfidenceBadge tier={confidence} reason={confidenceReason ?? undefined} />
         </div>
@@ -71,6 +84,13 @@ export function CodeResult({
           </div>
         ) : null}
       </div>
+
+      {whyText ? (
+        <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-muted)] px-5 py-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">Why this code</p>
+          <p className="mt-2 text-sm text-[var(--ink)]">{whyText}</p>
+        </div>
+      ) : null}
 
       <CitationChain citations={citationChain} />
     </div>

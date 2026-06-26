@@ -17,9 +17,21 @@ export type DocumentDetail = components['schemas']['DocumentResponse']
 export type DocType = components['schemas']['DocType']
 
 // Extended types — hand-maintained to include fields added in steel feature spec
-export type Citation = {
+// Leaf citation inside a gate item
+export type CitationRef = {
+  ref?: string
   text: string
+}
+
+// Supports both legacy flat { text, source_ref } and new gate { gate_id, outcome, citations[] }
+export type Citation = {
+  // legacy flat format
+  text?: string
   source_ref?: string | null
+  // new gate format (classification)
+  gate_id?: string
+  outcome?: string
+  citations?: CitationRef[]
 }
 
 export type QAAttribute = {
@@ -47,6 +59,7 @@ export type QAResponse = {
   citation_chain?: Citation[] | null
   alternatives?: QACandidate[] | null
   attributes?: QAAttribute[] | null
+  why_text?: string | null
   [key: string]: unknown
 }
 
@@ -63,6 +76,8 @@ export type Classification = {
   citation_chain?: Citation[] | null
   auto_resolved?: boolean | null
   candidate_codes?: QACandidate[] | null
+  tree_version?: string | null
+  nomenclature_version?: string | null
   created_at: string
 }
 
@@ -78,6 +93,7 @@ export type OriginResult = {
   melt_country?: string | null
   pour_country?: string | null
   melt_pour_qualifies?: boolean | null
+  disqualifying_reason?: string | null
   treated_conservatively: boolean
   blocking_items_json: Record<string, unknown>[] | null
   confidence: ConfidenceTier
@@ -87,4 +103,13 @@ export type OriginResult = {
   disclaimer: string
   not_a_customs_ruling: boolean
   citations?: Citation[] | null
+}
+
+export type MeltAndPourResult = {
+  eligible: boolean
+  melt_country: string | null
+  pour_country: string | null
+  confidence: string
+  disqualifying_reason: string | null
+  citations: string[] | null
 }

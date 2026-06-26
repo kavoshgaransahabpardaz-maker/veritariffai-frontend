@@ -3,8 +3,14 @@ import { MeltPourCard } from '@/components/common/MeltPourCard'
 import { SectionCard } from '@/components/common/SectionCard'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/features/auth/AuthProvider'
-import { useEvaluateOriginMutation, useOriginResultQuery, useOriginRuleQuery } from '@/features/origin/hooks'
+import {
+  useEvaluateOriginMutation,
+  useMeltAndPourMutation,
+  useOriginResultQuery,
+  useOriginRuleQuery,
+} from '@/features/origin/hooks'
 import { useWorkspaceShipment } from '@/features/shipments/workspace'
+import type { MeltAndPourResult } from '@/lib/api/types'
 
 export function OriginPage() {
   const { shipment } = useWorkspaceShipment()
@@ -12,7 +18,14 @@ export function OriginPage() {
   const ruleQuery = useOriginRuleQuery(auth.tokens?.accessToken, shipment.id)
   const resultQuery = useOriginResultQuery(auth.tokens?.accessToken, shipment.id)
   const evaluateMutation = useEvaluateOriginMutation(auth.tokens?.accessToken, shipment.id)
+  const meltAndPourMutation = useMeltAndPourMutation(auth.tokens?.accessToken, shipment.id)
   const [attested, setAttested] = useState(false)
+  const [meltAndPourResult, setMeltAndPourResult] = useState<MeltAndPourResult | null>(null)
+
+  async function runMeltAndPour() {
+    const result = await meltAndPourMutation.mutateAsync()
+    setMeltAndPourResult(result)
+  }
 
   return (
     <div className="space-y-6">
@@ -43,9 +56,40 @@ export function OriginPage() {
         )}
       </SectionCard>
 
+      {/* ── TCA Melt-and-Pour (dedicated endpoint) ── */}
       <SectionCard
-        title="Melt & Pour Origin Determination"
-        description="Steel preferential origin is based on melt and pour country from the MTC."
+        title="Melt-and-Pour Origin (TCA ORIG-4)"
+        eyebrow="Steel origin"
+        description="Determines TCA preferential origin by reading melt and pour countries from the MTC. Confidence is always VERIFY — user must confirm."
+        actions={
+          <Button onClick={runMeltAndPour} disabled={meltAndPourMutation.isPending}>
+            {meltAndPourMutation.isPending ? 'Determining…' : 'Determine Melt-and-Pour Origin'}
+          </Button>
+        }
+      >
+        {meltAndPourResult ? (
+          <MeltPourCard
+            meltCountry={meltAndPourResult.melt_country}
+            pourCountry={meltAndPourResult.pour_country}
+            qualifies={meltAndPourResult.eligible}
+            confidence={meltAndPourResult.confidence}
+            disqualifyingReason={meltAndPourResult.disqualifying_reason}
+          />
+        ) : (
+          <p className="text-sm text-[var(--muted)]">
+            Run the determination to check TCA melt-and-pour eligibility from the uploaded MTC.
+          </p>
+        )}
+        {meltAndPourMutation.error ? (
+          <p className="mt-3 text-sm text-[var(--danger)]">Unable to determine melt-and-pour origin. Check that an MTC has been uploaded.</p>
+        ) : null}
+      </SectionCard>
+
+      {/* ── Full origin evaluation (BOM-based) ── */}
+      <SectionCard
+        title="Full Origin Evaluation"
+        eyebrow="Rules of origin"
+        description="BOM-based origin qualification under the applicable TCA rule."
         actions={
           <Button onClick={() => evaluateMutation.mutate(attested)} disabled={evaluateMutation.isPending}>
             {evaluateMutation.isPending ? 'Evaluating...' : 'Evaluate Origin'}
@@ -71,6 +115,7 @@ export function OriginPage() {
             confidence={resultQuery.data.confidence}
             disclaimer={resultQuery.data.disclaimer}
             citations={resultQuery.data.citations}
+            disqualifyingReason={resultQuery.data.disqualifying_reason}
           />
         ) : (
           <p className="text-sm text-[var(--muted)]">No origin evaluation yet. Upload an MTC in Intake and run evaluate.</p>

@@ -17,6 +17,23 @@ import { useWorkspaceShipment } from '@/features/shipments/workspace'
 import type { DocType } from '@/lib/api/types'
 import { formatDateTime } from '@/lib/utils'
 
+const DOC_TYPE_LABELS: Record<string, string> = {
+  statement_of_origin: 'Statement of Origin (TCA ORIG-4)',
+  statement_on_origin: 'Statement of Origin (TCA ORIG-4)',
+  certificate_of_origin: 'Certificate of Origin',
+  commercial_invoice: 'Commercial Invoice',
+  packing_list: 'Packing List',
+  customs_data: 'Customs Data',
+  import_declaration: 'Import Declaration',
+  export_declaration: 'Export Declaration',
+  mtc_audit_report: 'MTC Audit Report',
+  barristers_bundle: "Barrister's Bundle",
+}
+
+function docTypeLabel(docType: string): string {
+  return DOC_TYPE_LABELS[docType] ?? docType
+}
+
 export function DocumentsPage() {
   const { shipment } = useWorkspaceShipment()
   const auth = useAuth()
@@ -45,7 +62,7 @@ export function DocumentsPage() {
               >
                 <div>
                   <p className="text-sm font-semibold text-[var(--ink)]">
-                    {doc.doc_type === 'statement_on_origin' ? 'Statement of Origin' : doc.doc_type}
+                    {docTypeLabel(doc.doc_type)}
                   </p>
                   {doc.blocker ? <p className="mt-1 text-xs text-[var(--danger)]">{doc.blocker}</p> : null}
                 </div>
@@ -56,7 +73,7 @@ export function DocumentsPage() {
         </SectionCard>
 
         <SectionCard
-          title={selectedDocType ? `Document detail: ${selectedDocType === 'statement_on_origin' ? 'Statement of Origin' : selectedDocType}` : 'Document detail'}
+          title={selectedDocType ? `Document detail: ${docTypeLabel(selectedDocType)}` : 'Document detail'}
           description="Generation and certification are separate. Certification is always an explicit user act."
           actions={selectedDocType ? <CodeChip value={selectedDocType} /> : null}
         >

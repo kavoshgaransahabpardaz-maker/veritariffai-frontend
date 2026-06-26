@@ -9,7 +9,8 @@ type MeltPourCardProps = {
   basis?: string
   confidence?: string
   disclaimer?: string
-  citations?: Array<{ text: string; source_ref?: string | null }> | null
+  citations?: Array<{ text?: string; source_ref?: string | null }> | null
+  disqualifyingReason?: string | null
 }
 
 export function MeltPourCard({
@@ -20,6 +21,7 @@ export function MeltPourCard({
   confidence,
   disclaimer,
   citations,
+  disqualifyingReason,
 }: MeltPourCardProps) {
   const statusColor =
     qualifies === true ? 'text-[var(--success)]' :
@@ -27,7 +29,7 @@ export function MeltPourCard({
     'text-[var(--warning)]'
 
   const statusLabel =
-    qualifies === true ? 'Qualifies' :
+    qualifies === true ? 'TCA Melt-and-Pour Origin Verified' :
     qualifies === false ? 'Does not qualify' :
     'Needs review'
 
@@ -44,6 +46,13 @@ export function MeltPourCard({
           {statusLabel}
         </span>
       </div>
+
+      {disqualifyingReason ? (
+        <div className="rounded-xl border border-[var(--warning)]/20 bg-[var(--warning-soft)] px-4 py-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--warning)]">Disqualifying reason</p>
+          <p className="mt-1 text-sm text-[var(--warning)]">{disqualifyingReason}</p>
+        </div>
+      ) : null}
 
       <div className="grid gap-4 md:grid-cols-2">
         <div className="rounded-xl border border-[var(--border)] bg-[var(--surface-muted)] px-4 py-4">

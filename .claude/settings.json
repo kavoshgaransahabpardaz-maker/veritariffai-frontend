@@ -9,7 +9,8 @@
       "Bash(rtk npm:*)",
       "Bash(rtk tsc:*)",
       "Bash(node -e ':*)",
-      "Bash(node -e \" const { z } = require\\('/Users/behnam/vscode/veritarifai-front/node_modules/zod'\\) const s = z.string\\(\\).min\\(2, 'Enter a name.'\\) const r = s.safeParse\\(''\\) const err = r.error console.log\\('has .errors:', !!err.errors\\) console.log\\('has .issues:', !!err.issues\\) console.log\\('.errors:', JSON.stringify\\(err.errors\\)\\) console.log\\('.issues:', JSON.stringify\\(err.issues\\)\\) \")"
+      "Bash(node -e \" const { z } = require\\('/Users/behnam/vscode/veritarifai-front/node_modules/zod'\\) const s = z.string\\(\\).min\\(2, 'Enter a name.'\\) const r = s.safeParse\\(''\\) const err = r.error console.log\\('has .errors:', !!err.errors\\) console.log\\('has .issues:', !!err.issues\\) console.log\\('.errors:', JSON.stringify\\(err.errors\\)\\) console.log\\('.issues:', JSON.stringify\\(err.issues\\)\\) \")",
+      "Bash(rtk wc:*)"
     ]
   },
   "hooks": {

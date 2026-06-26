@@ -52,10 +52,24 @@ export const extractionSchema = z
   })
   .loose()
 
+// Leaf citation inside a gate item: { ref, text }
+export const citationRefSchema = z
+  .object({
+    ref: z.string().optional(),
+    text: z.string(),
+  })
+  .loose()
+
+// Supports both legacy flat { text, source_ref } and new gate { gate_id, outcome, citations[] }
 export const citationSchema = z
   .object({
-    text: z.string(),
+    // legacy flat format (cost, origin)
+    text: z.string().optional(),
     source_ref: z.string().nullable().optional(),
+    // new gate format (classification)
+    gate_id: z.string().optional(),
+    outcome: z.string().optional(),
+    citations: z.array(citationRefSchema).optional(),
   })
   .loose()
 
@@ -89,6 +103,7 @@ export const qaSchema = z
     citation_chain: z.array(citationSchema).nullable().optional(),
     alternatives: z.array(qaCandidateSchema).nullable().optional(),
     attributes: z.array(qaAttributeSchema).nullable().optional(),
+    why_text: z.string().nullable().optional(),
   })
   .loose()
 
@@ -99,10 +114,15 @@ export const classificationSchema = z
     hs_code: z.string().nullable(),
     description: z.string().nullable(),
     confidence: confidenceStringSchema,
+    confidence_reason: z.string().nullable().optional(),
     source: z.enum(['assistant', 'override']),
     official_data_json: z.record(z.string(), z.unknown()).nullable(),
     controls: z.array(z.string()).nullable(),
     citation_chain: z.array(citationSchema).nullable(),
+    auto_resolved: z.boolean().nullable().optional(),
+    candidate_codes: z.array(qaCandidateSchema).nullable().optional(),
+    tree_version: z.string().nullable().optional(),
+    nomenclature_version: z.string().nullable().optional(),
     created_at: z.string(),
   })
   .loose()
@@ -184,6 +204,7 @@ export const originResultSchema = z
     melt_country: z.string().nullable(),
     pour_country: z.string().nullable(),
     melt_pour_qualifies: z.boolean().nullable(),
+    disqualifying_reason: z.string().nullable().optional(),
     treated_conservatively: z.boolean(),
     blocking_items_json: z.array(z.record(z.string(), z.unknown())).nullable(),
     confidence: confidenceStringSchema,

@@ -140,6 +140,8 @@ export function ClassificationPage() {
                 confidenceReason={cls.confidence_reason ?? null}
                 autoResolved={cls.auto_resolved ?? null}
                 citationChain={cls.citation_chain}
+                treeVersion={cls.tree_version ?? null}
+                nomenclatureVersion={cls.nomenclature_version ?? null}
                 onConfirm={
                   confidence === 'verify'
                     ? () => overrideMutation.mutate({ hs_code: cls.hs_code! })
@@ -174,6 +176,7 @@ export function ClassificationPage() {
                 confidence={normalizeConfidence(qaState.confidence ?? 'verify')}
                 autoResolved={qaState.auto_resolved ?? null}
                 citationChain={qaState.citation_chain}
+                whyText={qaState.why_text ?? null}
                 onConfirm={() => overrideMutation.mutate({ hs_code: qaState.candidate_code! })}
                 isConfirming={overrideMutation.isPending}
               />

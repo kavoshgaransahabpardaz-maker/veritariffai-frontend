@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ApiError } from '@/lib/api/client'
-import { evaluateOrigin, getOriginResult, getOriginRule, setBom } from '@/lib/api/origin'
+import { evaluateMeltAndPour, evaluateOrigin, getOriginResult, getOriginRule, setBom } from '@/lib/api/origin'
 import type { BomItemCreate } from '@/lib/api/types'
 
 export function useOriginRuleQuery(token: string | null | undefined, shipmentId: string) {
@@ -50,5 +50,11 @@ export function useEvaluateOriginMutation(token: string | null | undefined, ship
       queryClient.setQueryData(['shipments', shipmentId, 'origin-result'], result)
       queryClient.invalidateQueries({ queryKey: ['shipments', shipmentId] })
     },
+  })
+}
+
+export function useMeltAndPourMutation(token: string | null | undefined, shipmentId: string) {
+  return useMutation({
+    mutationFn: () => evaluateMeltAndPour(token!, shipmentId),
   })
 }
